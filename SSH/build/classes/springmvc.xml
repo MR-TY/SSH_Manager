@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- springmvc只进行控制层的扫描 -->
+	<context:component-scan base-package="com.ty">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	
+	<!--接收到/insertOneDeptJSP自动转发到showAddDept.jsp页面之下  :注意必須添加/-->
+	<bean name="/insertOneDeptJSP" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+      <property name="viewName" value="/WEB-INF/jsp/dept/showAddDept.jsp"/>
+   </bean>
+   <!-- 用户 -->
+   <bean name="/insertOneUserJSP" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+      <property name="viewName" value="/WEB-INF/jsp/user/showAddUser.jsp"/>
+   </bean>
+   
+   <!-- 职位 -->
+   <bean name="/insertStaffJsp" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+      <property name="viewName" value="/WEB-INF/jsp/job/showAddJob.jsp"/>
+   </bean>
+   
+    <!-- 公告 -->
+   <bean name="/insertNoticeJSP" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+      <property name="viewName" value="/WEB-INF/jsp/notice/showAddNotice.jsp"/>
+   </bean>
+   
+    <!-- 员工-->
+   <bean name="/insertJSP" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+      <property name="viewName" value="/WEB-INF/jsp/employee/showAddEmployee.jsp"/>
+   </bean>
+   
+   <bean name="/insertFileJSP" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+      <property name="viewName" value="/WEB-INF/jsp/document/showAddDocument.jsp"/>
+   </bean>
+	<!-- <bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean> -->
+	<!--配置一个消息转换器 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<!-- 注入我们的消息转换器 -->
+		<property name="messageConverters">
+			<list>
+				<!-- 这个消息转换器的作用是JSON解析用的 -->
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+				<!-- 这个叫做字符串的消息转换器这个转换器的作用是:解决返回JSON格式字符串的时候中文乱码问题的 -->
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<!-- <property name="defaultCharset" value="UTF-8"></property> -->
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置文件的bean -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!--配置文件上传的容量  -->
+		<property name="maxUploadSize" value="1024000"></property>
+	</bean>
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven></mvc:annotation-driven>
+</beans>

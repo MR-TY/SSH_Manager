@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-1-3 12:47:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.ty.entity.Employee" table="tbl_employee">
+        <id name="eId" type="int" access="field">
+            <column name="EID" />
+            <generator class="native" />
+        </id>
+        <property name="eName" type="java.lang.String" access="field">
+            <column name="ENAME" />
+        </property>
+        <property name="idCardNum" type="java.lang.String">
+            <column name="IDCARDNUM" />
+        </property>
+       <property name="gender">
+       	<column name="GENDER" />
+       </property>
+        <many-to-one name="staff" class="com.ty.entity.Staff" fetch="join">
+            <column name="staffId" />
+        </many-to-one>
+        <property name="education" type="java.lang.String">
+            <column name="EDUCATION" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="mobilePhone" type="java.lang.String">
+            <column name="MOBILEPHONE" />
+        </property>
+        <property name="phoneNum" type="java.lang.String">
+            <column name="PHONENUM" />
+        </property>
+        <property name="politics">
+            <column name="POLITICS" />
+        </property>
+        <property name="qqNum" type="java.lang.String">
+            <column name="QQNUM" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="postCode" type="java.lang.String">
+            <column name="POSTCODE" />
+        </property>
+        <property name="birthDay" type="java.util.Date">
+            <column name="BIRTHDAY" />
+        </property>
+        <property name="nation" type="java.lang.String">
+            <column name="NATION" />
+        </property>
+        <property name="major" type="java.lang.String">
+            <column name="MAJOR" />
+        </property>
+        <property name="habbit" type="java.lang.String">
+            <column name="HABBIT" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <many-to-one name="dept" class="com.ty.entity.Dept" fetch="join">
+            <column name="dId" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-3 22:55:50 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.ty.entity.DownLoad" table="tbl_doenload">
+        <id name="downloadId" type="int">
+            <column name="DOWNLOADID" />
+            <generator class="native" />
+        </id>
+        <property name="downloadTitle" type="java.lang.String">
+            <column name="DOWNLOADTITLE" />
+        </property>
+        <property name="downPath" type="java.lang.String">
+            <column name="DOWNLOADPATH" />
+        </property>
+        <property name="downloadCreateTime" type="java.util.Date">
+            <column name="DOWNLOADCREATETIME" />
+        </property>
+        
+        <many-to-one name="user" class="com.ty.entity.User" fetch="join" >
+            <column name="eId" />
+        </many-to-one>
+        
+        <property name="downloadDes" type="java.lang.String">
+            <column name="DOWNLOADDES" />
+        </property>
+    </class>
+</hibernate-mapping>

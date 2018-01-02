@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-3 22:55:50 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.ty.entity.User" table="tbl_user">
+        <id name="eId" type="int" access="field">
+            <column name="EID" />
+            <!-- eid不能是自增長所以不能配置為：native,並且引用emp的值作為它的值 -->
+            <generator class="foreign">
+           		 <param name="property">emp</param>
+            </generator> 
+        </id>
+        
+        <one-to-one name="emp" class="com.ty.entity.Employee" constrained="true">
+        </one-to-one>
+        
+        <property name="uLoginName" type="java.lang.String" access="field">
+            <column name="ULOGINNAME" />
+        </property>
+        <property name="uPwd" type="java.lang.String" access="field">
+            <column name="UPWD" />
+        </property>
+        <property name="state" type="int">
+            <column name="STATE" />
+        </property>
+        <property name="uCreateTime" type="java.util.Date" access="field">
+            <column name="UCREATETIME" />
+        </property>
+    </class>
+</hibernate-mapping>
